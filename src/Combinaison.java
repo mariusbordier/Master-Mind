@@ -1,11 +1,8 @@
-import java.util.*;
-
-import javax.swing.JOptionPane;
 
 public class Combinaison {
 	private int[] combinaison;
 	private int[] proposition;
-	private int nbrbienplace,nbrmalplace,nbraucunpion;
+	private int nbrbienplace,nbrmalplace;
 	
 	public Combinaison(){
 		combinaison= new int[4];
@@ -27,9 +24,7 @@ public class Combinaison {
 	
 	
 	public void verifcombinaison(int[] laproposition){
-		//JOptionPane.showMessageDialog(null, proposition[0]+" "+proposition[1]+proposition[2]+proposition[3]);
-		//JOptionPane.showMessageDialog(null, combinaison[0]+" "+combinaison[1]+combinaison[2]+combinaison[3]);
-		int i ;
+		int j,i;
 		proposition[0]=laproposition[0];
 		proposition[1]=laproposition[1];
 		proposition[2]=laproposition[2];
@@ -41,21 +36,20 @@ public class Combinaison {
 			if(proposition[i]==combinaison[i]){
 				nbrbienplace +=1;
 				proposition[i]=-1;
+				combinaison[i]=-2;
 				res[i]=true;
 			}
 		}
-		for(i=0;i<4;i++){
-			if((combinaison[i]==proposition[0]||combinaison[i]==proposition[1]||combinaison[i]==proposition[2]||combinaison[i]==proposition[3])&&res[i]==false){
-				nbrmalplace++;
-			}else{
-				nbraucunpion++;
-			}
-		}
-		//nbrmalplace=nbrmalplace-nbrbienplace;
-		
+		 for(i=0;i<4;i++){
+		   for(j=0;j<4;j++){
+		     if((i!=j)&&(combinaison[i] == proposition[j])){
+		    	 nbrmalplace++;
+		    	 combinaison[i] = -2;
+		         proposition[j] = -1;
+		      }
+		    }
+		  }	
 	}
-		
-		
 	
 		
 			
@@ -65,9 +59,6 @@ public class Combinaison {
 	
 	public int getMalPlace(){
 		return nbrmalplace;
-	}
-	public int getAucunPion(){
-		return nbraucunpion;
 	}
 	
 	public int[] getcombinaison(){

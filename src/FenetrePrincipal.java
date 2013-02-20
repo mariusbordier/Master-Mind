@@ -79,6 +79,7 @@ public class FenetrePrincipal extends JFrame {
 	private JButton effacerLigne = new JButton("Effacer Ligne");
 	
 	private Ordinateur ordi = new Ordinateur();
+	private Humain lejoueur = new Humain();
 	private Couleurs c = new Couleurs();
 	
 	public FenetrePrincipal(){};
@@ -207,13 +208,13 @@ public class FenetrePrincipal extends JFrame {
 		container.add(boutonViolet);
 		
 		
-		effacerDernierPion.setBounds(230, 150, 150, 40);
+		effacerDernierPion.setBounds(230, 200, 150, 40);
 		container.add(effacerDernierPion);
 		
-		effacerLigne.setBounds(230, 200, 150, 40);
+		effacerLigne.setBounds(230, 250, 150, 40);
 		container.add(effacerLigne);
 		
-		validerLigne.setBounds(230, 250, 150, 40);
+		validerLigne.setBounds(230, 150, 150, 40);
 		container.add(validerLigne);
 		
 		if(niveauDifficulte == "Facile"){
@@ -460,6 +461,7 @@ class EffacerLigne  implements ActionListener{
 
 class ValiderLigne  implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
+    	boolean res=false;
     	nbrPionBienPlace=0;
     	nbrPionMalPlace=0;
     	container.revalidate();
@@ -472,7 +474,6 @@ class ValiderLigne  implements ActionListener{
 		
 		nbrPionBienPlace=lacombi.getBienPlace();
 		nbrPionMalPlace=lacombi.getMalPlace();
-		nbrAucunPion=lacombi.getAucunPion();
 		if(nbrPionBienPlace>0){
 			for(int nbr=0;nbr<nbrPionBienPlace;nbr++){
 				plateauPionResultat[nbrTour][nbr].setIcon(iconPionResultatNoir);
@@ -493,6 +494,7 @@ class ValiderLigne  implements ActionListener{
 				for(collones=0;collones<4;collones++){
 					tableauDeSolution[collones].setEnabled(true);
 				}
+				res=true;
 
 			}
 		}
@@ -501,7 +503,25 @@ class ValiderLigne  implements ActionListener{
 				plateauPionResultat[nbrTour][nbr].setIcon(iconPionResultatBlanc);
 			}
 		}
+		if(nbrTour==9 && res==false){
+			JOptionPane.showMessageDialog(null, "Vous avez perdu!");
+			boutonBleu.setEnabled(false);
+			boutonRouge.setEnabled(false);
+			boutonNoir.setEnabled(false);
+			boutonJaune.setEnabled(false);
+			boutonOrange.setEnabled(false);
+			boutonVert.setEnabled(false);
+			boutonTurquoise.setEnabled(false);
+			boutonViolet.setEnabled(false);
+			validerLigne.setEnabled(false);
+			effacerDernierPion.setEnabled(false);
+			effacerLigne.setEnabled(false);
+			for(collones=0;collones<4;collones++){
+				tableauDeSolution[collones].setEnabled(true);
+			}
+		}
     	nbrTour++;
+    	
     	}
     }
 }
