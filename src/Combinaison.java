@@ -7,6 +7,10 @@ public class Combinaison {
 	public Combinaison(){
 		combinaison= new int[4];
 		proposition = new int[4];
+		for(int i=0;i<4;i++){
+			combinaison[i]=-1;
+			proposition[i]=-1;
+		}
 		nbrbienplace=0;
 		nbrmalplace=0;
 	}

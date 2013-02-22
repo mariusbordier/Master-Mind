@@ -1,16 +1,5 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Panel;
 import java.awt.event.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -36,7 +25,7 @@ public class FenetrePrincipal extends JFrame {
 	private String niveauDifficulte;
 	private int[] lacombinaisonATrouve = new int[4];
 	private int[] proposition ={-1,-1,-1,-1};
-	private int nbrTour,posPion,lignes,collones,nbrPionBienPlace,nbrPionMalPlace,nbrAucunPion;
+	private int nbrTour,posPion,lignes,collones,nbrPionBienPlace,nbrPionMalPlace,nbJoueur=0;
 	
 	
 	//Images Pions
@@ -82,10 +71,8 @@ public class FenetrePrincipal extends JFrame {
 	private Humain lejoueur = new Humain();
 	private Couleurs c = new Couleurs();
 	
-	public FenetrePrincipal(){};
-	
-	public FenetrePrincipal(String leNiveauDeDifficulte){
-		super("Master Mind") ;
+	public FenetrePrincipal(String leNiveauDeDifficulte,Combinaison laCombinaison){
+		super("Master Mind");
 		this.setSize(400, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -110,7 +97,7 @@ public class FenetrePrincipal extends JFrame {
 				setVisible(false);
 				JFrame fen;
 				ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
-				fen = new FenetrePrincipal("Facile");
+				fen = new FenetrePrincipal("Facile",new Combinaison());
 				((JFrame) fen).getContentPane().add(panel);
 			}
 		});
@@ -121,7 +108,7 @@ public class FenetrePrincipal extends JFrame {
 				setVisible(false);
 				JFrame fen;
 				ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
-				fen = new FenetrePrincipal("Moyen");
+				fen = new FenetrePrincipal("Moyen",new Combinaison());
 				((JFrame) fen).getContentPane().add(panel);
 			}
 		});
@@ -132,7 +119,7 @@ public class FenetrePrincipal extends JFrame {
 				setVisible(false);
 				JFrame fen;
 				ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
-				fen = new FenetrePrincipal("Difficile");
+				fen = new FenetrePrincipal("Difficile",new Combinaison());
 				((JFrame) fen).getContentPane().add(panel);
 			}
 		});
@@ -229,10 +216,14 @@ public class FenetrePrincipal extends JFrame {
 			boutonViolet.setEnabled(false);
 
 		}else{
-			lacombinaisonATrouve = ordi.creerCombinaisonAleatoirement(8);
+			if(laCombinaison.getcombinaison()[0]==-1){
+				lacombinaisonATrouve = ordi.creerCombinaisonAleatoirement(8);
+			}else{
+				lacombinaisonATrouve = ordi.creerCombinaison(laCombinaison);
+				nbJoueur=2;
+			}
 			
 		}
-		
 		
 		//initialisation du plateauJeu par des cases vides
      	for( lignes=0;lignes<10;lignes++){
@@ -520,7 +511,36 @@ class ValiderLigne  implements ActionListener{
 				tableauDeSolution[collones].setEnabled(true);
 			}
 		}
+		
+		if((nbrTour==9 && res==false)||nbrPionBienPlace==4){
+			JFrame fen;
+			String[] choix = {"A deux", "Tout seul","Quitter le jeu"};
+			ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
+			Object resChoix = JOptionPane.showInputDialog (new JFrame(), "Comment voulez vous rejouer ?","Master Mind",JOptionPane.QUESTION_MESSAGE,null,choix,choix[0]);
+			if(resChoix.toString()=="A deux"){
+				fen = new FenetreCreationCombinaison();
+				((JFrame) fen).getContentPane().add(panel);
+			}else if(resChoix.toString()=="Tout seul"){
+			
+				String[] difficulte = {"Facile", "Moyen", "Difficile"};
+				Object choixDifficulte = JOptionPane.showInputDialog (new JFrame(), "Choisissez un niveau de difficultŽ","Master Mind",JOptionPane.QUESTION_MESSAGE,null,difficulte,difficulte[0]);
+				if(choixDifficulte.toString()=="Facile"){
+					fen = new FenetrePrincipal(choixDifficulte.toString(),new Combinaison());
+					((JFrame) fen).getContentPane().add(panel);
+				}
+				else if(choixDifficulte.toString()=="Moyen"){
+					fen = new FenetrePrincipal(choixDifficulte.toString(),new Combinaison());
+					((JFrame) fen).getContentPane().add(panel);
+				}else{
+					fen = new FenetrePrincipal(choixDifficulte.toString(),new Combinaison());
+					((JFrame) fen).getContentPane().add(panel);
+				}
+			}else{
+				System.exit(0);
+			}
+		}
     	nbrTour++;
+    	
     	
     	}
     }

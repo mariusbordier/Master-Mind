@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +5,10 @@ import javax.swing.*;
 
 public class FenetreChoixJoueur extends JFrame implements ActionListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private  JButton homme = new JButton("Homme vs Homme");
 	private  JButton ordi = new JButton("Homme vs Ordinateur");
 	private JLabel titre = new JLabel("Veuillez choisir une de ces deux options :");
@@ -38,19 +41,19 @@ public class FenetreChoixJoueur extends JFrame implements ActionListener{
 			((JFrame) fen).getContentPane().add(panel);
 		}else {
 			this.hide();
-			JFrame fen = new FenetrePrincipal();
+			JFrame fen;
 			ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
 			String[] difficulte = {"Facile", "Moyen", "Difficile"};
-			Object res = JOptionPane.showInputDialog (fen, "Choisissez un niveau de difficulté","Master Mind",JOptionPane.QUESTION_MESSAGE,null,difficulte,difficulte[0]);
+			Object res = JOptionPane.showInputDialog (new JFrame(), "Choisissez un niveau de difficulté","Master Mind",JOptionPane.QUESTION_MESSAGE,null,difficulte,difficulte[0]);
 			if(res.toString()=="Facile"){
-				fen = new FenetrePrincipal(res.toString());
+				fen = new FenetrePrincipal(res.toString(),new Combinaison());
 				((JFrame) fen).getContentPane().add(panel);
 			}
 			else if(res.toString()=="Moyen"){
-				fen = new FenetrePrincipal(res.toString());
+				fen = new FenetrePrincipal(res.toString(),new Combinaison());
 				((JFrame) fen).getContentPane().add(panel);
 			}else{
-				fen = new FenetrePrincipal(res.toString());
+				fen = new FenetrePrincipal(res.toString(),new Combinaison());
 				((JFrame) fen).getContentPane().add(panel);
 			}
 			fen.setVisible(true);

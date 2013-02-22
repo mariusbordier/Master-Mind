@@ -19,7 +19,9 @@ public abstract class Joueur {
 		return lacombinaison;
 	}
 	
-	
+	public int[] creerCombinaison(Combinaison laCombinaison){
+		return laCombinaison.getcombinaison();
+	}
 	 
 	
 }
