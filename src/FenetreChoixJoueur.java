@@ -32,7 +32,10 @@ public class FenetreChoixJoueur extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == homme) {
-			JOptionPane.showMessageDialog(null, "Homme");
+			this.hide();
+			JFrame fen = new FenetreCreationCombinaison();
+			ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
+			((JFrame) fen).getContentPane().add(panel);
 		}else {
 			this.hide();
 			JFrame fen = new FenetrePrincipal();
