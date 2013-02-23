@@ -12,7 +12,12 @@ import javax.swing.JPanel;
 
 public class FenetreCreationCombinaison extends JFrame {
 	
-	private JPanel container= new JPanel();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private JPanel plateau= new JPanel();
 	
 	private ImageIcon iconBleu = new ImageIcon(this.getClass().getResource("/Images/bleu.gif"));
 	private ImageIcon iconRouge = new ImageIcon(this.getClass().getResource("/Images/rouge.gif"));
@@ -39,10 +44,12 @@ public class FenetreCreationCombinaison extends JFrame {
 	private int posPion,collones;
 	private int[] proposition ={-1,-1,-1,-1};
 	
-	private Couleurs c = new Couleurs();
+	private Couleurs laCouleur = new Couleurs();
 	
 	private JLabel[] plateauJeu = new JLabel[4];
-	private JLabel pion = new JLabel("Créer votre combinaison : ");
+	private JLabel pion = new JLabel("Créer votre combinaison :");
+	
+	private Humain lejoueurCreationCombinaison = new Humain();
 	
 	public FenetreCreationCombinaison(){
 		super("Master Mind") ;
@@ -50,8 +57,8 @@ public class FenetreCreationCombinaison extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setContentPane(container);
-		container.setLayout(null);
+		this.setContentPane(plateau);
+		plateau.setLayout(null);
 		
 		pion.setForeground(Color.WHITE);
 		pion.setBounds(100, 10, 320, 40);
@@ -72,29 +79,28 @@ public class FenetreCreationCombinaison extends JFrame {
 		boutonTurquoise.setBorderPainted(false);
 		boutonViolet.setBounds(330,50,40,40);
 		boutonViolet.setBorderPainted(false);
-		container.add(boutonBleu);
-		container.add(boutonRouge);
-		container.add(boutonNoir);
-		container.add(boutonJaune);
-		container.add(boutonOrange);
-		container.add(boutonVert);
-		container.add(boutonTurquoise);
-		container.add(boutonViolet);
-		container.add(pion);
+		plateau.add(boutonBleu);
+		plateau.add(boutonRouge);
+		plateau.add(boutonNoir);
+		plateau.add(boutonJaune);
+		plateau.add(boutonOrange);
+		plateau.add(boutonVert);
+		plateau.add(boutonTurquoise);
+		plateau.add(boutonViolet);
+		plateau.add(pion);
 		
-		//initialisation du plateauJeu par des cases vides
-    		for( collones=0;collones<4;collones++){
-    			plateauJeu[collones]= new JLabel(iconPion);
-    			plateauJeu[collones].setBounds(collones*40+120,100, 40, 40);
-    			container.add(plateauJeu[collones]);
-    		}
+    	for( collones=0;collones<4;collones++){
+    		plateauJeu[collones]= new JLabel(iconPion);
+    		plateauJeu[collones].setBounds(collones*40+120,100, 40, 40);
+    		plateau.add(plateauJeu[collones]);
+    	}
     		
     	effacerDernierPion.setBounds(245, 150, 150, 40);
-    	container.add(effacerDernierPion);
+    	plateau.add(effacerDernierPion);
     	effacerLigne.setBounds(125, 150, 120, 40);
-    	container.add(effacerLigne);
+    	plateau.add(effacerLigne);
     	validerLigne.setBounds(05, 150, 120, 40);
-    	container.add(validerLigne);
+    	plateau.add(validerLigne);
     	
     	boutonBleu.addActionListener(new PionBleu());
     	boutonRouge.addActionListener(new PionRouge());
@@ -115,14 +121,14 @@ public class FenetreCreationCombinaison extends JFrame {
 class PionBleu  implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconBleu);
-        	proposition[posPion]=c.idCouleur("bleu");
+        	proposition[posPion]=laCouleur.idCouleur("bleu");
         	posPion++;
     	}else{
-        		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+        		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
         	}
     }
     
@@ -131,14 +137,14 @@ class PionBleu  implements ActionListener{
 class PionRouge  implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconRouge);
-        	proposition[posPion]=c.idCouleur("rouge");
+        	proposition[posPion]=laCouleur.idCouleur("rouge");
         	posPion++;
     	}else{
-    		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+    		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
     	}
     }
     
@@ -147,14 +153,14 @@ class PionRouge  implements ActionListener{
 class PionNoir  implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconNoir);
-        	proposition[posPion]=c.idCouleur("noir");
+        	proposition[posPion]=laCouleur.idCouleur("noir");
         	posPion++;
     	}else{
-    		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+    		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
     	}
     }
     
@@ -162,14 +168,14 @@ class PionNoir  implements ActionListener{
 class PionJaune  implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconJaune);
-        	proposition[posPion]=c.idCouleur("jaune");
+        	proposition[posPion]=laCouleur.idCouleur("jaune");
         	posPion++;
     	}else{
-    		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+    		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
     	}
     }
     
@@ -177,14 +183,14 @@ class PionJaune  implements ActionListener{
 class PionOrange  implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconOrange);
-        	proposition[posPion]=c.idCouleur("orange");
+        	proposition[posPion]=laCouleur.idCouleur("orange");
         	posPion++;
     	}else{
-    		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+    		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
     	}
     }
     
@@ -192,14 +198,14 @@ class PionOrange  implements ActionListener{
 class PionVert  implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconVert);
-        	proposition[posPion]=c.idCouleur("vert");
+        	proposition[posPion]=laCouleur.idCouleur("vert");
         	posPion++;
     	}else{
-    		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+    		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
     	}
     }
     
@@ -207,14 +213,14 @@ class PionVert  implements ActionListener{
 class PionTurquoise  implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconTurquoise);
-        	proposition[posPion]=c.idCouleur("turquoise");
+        	proposition[posPion]=laCouleur.idCouleur("turquoise");
         	posPion++;
     	}else{
-    		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+    		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
     	}
     }
     
@@ -222,14 +228,14 @@ class PionTurquoise  implements ActionListener{
 class PionViolet implements ActionListener{
 
     public void actionPerformed(ActionEvent arg) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion<4){
         	plateauJeu[posPion].setIcon(iconViolet);
-        	proposition[posPion]=c.idCouleur("violet");
+        	proposition[posPion]=laCouleur.idCouleur("violet");
         	posPion++;
     	}else{
-    		JOptionPane.showMessageDialog(container, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
+    		JOptionPane.showMessageDialog(plateau, "Ligne complète, Valider la ligne", "Message d'avertissement", JOptionPane.ERROR_MESSAGE) ;
     	}
     }
     
@@ -237,8 +243,8 @@ class PionViolet implements ActionListener{
 
 class EffacerDernierPion  implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	if(posPion>0){
     	posPion--;
     	proposition[posPion]=-1;
@@ -249,8 +255,8 @@ class EffacerDernierPion  implements ActionListener{
 
 class EffacerLigne  implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	for(int i=posPion-1;i>=0;i--){
     		plateauJeu[i].setIcon(iconPion);
     		if(proposition[i]!=-1){
@@ -263,14 +269,13 @@ class EffacerLigne  implements ActionListener{
 
 class ValiderLigne  implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
-    	container.revalidate();
-    	container.repaint();
+    	plateau.revalidate();
+    	plateau.repaint();
     	JFrame fen;
     	if(posPion==4){
-    		Combinaison lacombi;
 			ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
-			lacombi = new Combinaison(proposition[0], proposition[1], proposition[2], proposition[3]);
-			fen = new FenetrePrincipal("Difficile",lacombi);
+			lejoueurCreationCombinaison = new Humain(proposition[0], proposition[1], proposition[2], proposition[3]);
+			fen = new FenetrePrincipal("Difficile",lejoueurCreationCombinaison.getCombinaison(),2);
 			((JFrame) fen).getContentPane().add(panel);
     	}
     }

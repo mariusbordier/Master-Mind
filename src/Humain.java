@@ -1,8 +1,12 @@
 
 public class Humain extends Joueur {
 	
-	public Humain(){
+	public Humain(int a,int b,int c,int d){
+		super(a,b,c,d);
 	}
 	
+	public Humain(){
+		super();
+	}
 
 }

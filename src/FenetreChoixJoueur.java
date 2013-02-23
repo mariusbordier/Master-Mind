@@ -46,14 +46,14 @@ public class FenetreChoixJoueur extends JFrame implements ActionListener{
 			String[] difficulte = {"Facile", "Moyen", "Difficile"};
 			Object res = JOptionPane.showInputDialog (new JFrame(), "Choisissez un niveau de difficulté","Master Mind",JOptionPane.QUESTION_MESSAGE,null,difficulte,difficulte[0]);
 			if(res.toString()=="Facile"){
-				fen = new FenetrePrincipal(res.toString(),new Combinaison());
+				fen = new FenetrePrincipal(res.toString(),new Combinaison(),1);
 				((JFrame) fen).getContentPane().add(panel);
 			}
 			else if(res.toString()=="Moyen"){
-				fen = new FenetrePrincipal(res.toString(),new Combinaison());
+				fen = new FenetrePrincipal(res.toString(),new Combinaison(),1);
 				((JFrame) fen).getContentPane().add(panel);
 			}else{
-				fen = new FenetrePrincipal(res.toString(),new Combinaison());
+				fen = new FenetrePrincipal(res.toString(),new Combinaison(),1);
 				((JFrame) fen).getContentPane().add(panel);
 			}
 			fen.setVisible(true);

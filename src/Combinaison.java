@@ -8,7 +8,7 @@ public class Combinaison {
 		combinaison= new int[4];
 		proposition = new int[4];
 		for(int i=0;i<4;i++){
-			combinaison[i]=-1;
+			combinaison[i]=-2;
 			proposition[i]=-1;
 		}
 		nbrbienplace=0;
@@ -33,7 +33,6 @@ public class Combinaison {
 		proposition[1]=laproposition[1];
 		proposition[2]=laproposition[2];
 		proposition[3]=laproposition[3];
-
 		boolean res[]=new boolean[4];
 		for(i=0;i<4;i++){
 			res[i]=false;
@@ -52,7 +51,7 @@ public class Combinaison {
 		         proposition[j] = -1;
 		      }
 		    }
-		  }	
+		  }
 	}
 	
 		
@@ -65,7 +64,7 @@ public class Combinaison {
 		return nbrmalplace;
 	}
 	
-	public int[] getcombinaison(){
+	public int[] getCombinaison(){
 		return combinaison;
 	}
 }

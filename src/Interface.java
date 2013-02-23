@@ -1,11 +1,8 @@
 import java.awt.Frame;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-public class TestInterface {
-
+public class Interface {
 	/**
 	 * @param args
 	 */
