@@ -1,4 +1,3 @@
-import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -6,15 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 
 public class MeilleuresScores {
 	
 	private static final int NBMAX = 10;
 	private static final String separateur = "\t";
-	private static final String separateur2 = "_";
 	private static final String fichier = "scores";
 	private static ArrayList scores;
 

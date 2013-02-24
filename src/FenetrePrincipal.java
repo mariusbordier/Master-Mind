@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -468,12 +467,11 @@ class ValiderLigne  implements ActionListener{
     			if(nbrTour==9 && res==false){
     				JOptionPane.showMessageDialog(null, "Vous avez perdu!");
     			}else{
+    				String lenom=null;
     				nbrTour++;
     				JOptionPane.showMessageDialog(null, "Bravo vous avez gagnez en "+nbrTour +" tours !");
-    				
-    				String lenom =JOptionPane.showInputDialog("Vous êtes rentré dans le top 10, veuillez rentrer votre nom");
+    				lenom =JOptionPane.showInputDialog("Vous êtes rentré dans le top 10, veuillez rentrer votre nom");
     				MeilleuresScores.checkItOut(nbrTour, lenom);
-    				
     				res=true;
     			}
     			boutonBleu.setEnabled(false);
@@ -491,6 +489,7 @@ class ValiderLigne  implements ActionListener{
 					tableauDeSolution[collones].setEnabled(true);
 				}
 				if(nbrJoueur==2){
+					hide();
 					JFrame fen;
 					String[] choix = {"A deux", "Tout seul","Quitter le jeu"};
 					ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
