@@ -64,6 +64,9 @@ public class FenetreAffichageScores extends JFrame {
 			positionJoueur =  new JLabel(pos.toString());
 			nomJoueur = new JLabel(s[0]);
 			scoreJoueur = new JLabel(s[1]);
+			positionJoueur.setForeground(Color.white);
+			nomJoueur.setForeground(Color.white);
+			scoreJoueur.setForeground(Color.white);
 			positionJoueur.setBounds(50,70+i*20, 100, 50);
 			nomJoueur.setBounds(150,70+i*20, 100, 50);
 			scoreJoueur.setBounds(250,70+i*20, 100, 50);

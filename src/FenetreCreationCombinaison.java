@@ -273,10 +273,14 @@ class ValiderLigne  implements ActionListener{
     	plateau.repaint();
     	JFrame fen;
     	if(posPion==4){
+    		hide();
 			ImagePanel panel = new ImagePanel(new ImageIcon(this.getClass().getResource("/Images/fd.png")).getImage());
 			lejoueurCreationCombinaison = new Humain(proposition[0], proposition[1], proposition[2], proposition[3]);
 			fen = new FenetrePrincipal("Difficile",lejoueurCreationCombinaison.getCombinaison(),2);
 			((JFrame) fen).getContentPane().add(panel);
+    	}
+    	else{
+    		JOptionPane.showMessageDialog(null, "La ligne n'est pas complète");
     	}
     }
 }

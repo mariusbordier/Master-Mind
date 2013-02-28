@@ -56,7 +56,6 @@ public class FenetreChoixJoueur extends JFrame implements ActionListener{
 				fen = new FenetrePrincipal(res.toString(),new Combinaison(),1);
 				((JFrame) fen).getContentPane().add(panel);
 			}
-			fen.setVisible(true);
 		}
 	}
 
